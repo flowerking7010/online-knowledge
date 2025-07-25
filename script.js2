@@ -1,0 +1,163 @@
+const questions = [
+  {
+    question: "What is the correct syntax to create a function in Python?",
+    options: {
+      A: "function myFunction():",
+      B: "def myFunction():",
+      C: "create function myFunction()",
+      D: "function = myFunction()",
+    },
+    correctAnswer: "B",
+  },
+  {
+    question: "Which of the following is used to define a block of code in Python?",
+    options: {
+      A: "Curly braces {}",
+      B: "Parentheses ()",
+      C: "Indentation",
+      D: "Square brackets []",
+    },
+    correctAnswer: "C",
+  },
+  {
+    question: "What is the output of the following code?\n\n`print(2 * 3 + 4)`",
+    options: {
+      A: "10",
+      B: "14",
+      C: "12",
+      D: "8",
+    },
+    correctAnswer: "A",
+  },
+  {
+    question: "Which of the following data types is immutable in Python?",
+    options: {
+      A: "List",
+      B: "Set",
+      C: "Tuple",
+      D: "Dictionary",
+    },
+    correctAnswer: "C",
+  },
+  {
+    question: "What does `len()` function do in Python?",
+    options: {
+      A: "Returns the sum of a list",
+      B: "Returns the length of an object",
+      C: "Loops through a string",
+      D: "Checks the type of an object",
+    },
+    correctAnswer: "B",
+  },
+  {
+    question: "Which of the following is used to handle exceptions in Python?",
+    options: {
+      A: "try-catch",
+      B: "try-except",
+      C: "catch-try",
+      D: "except-try",
+    },
+    correctAnswer: "B",
+  },
+  {
+    question: "How can you add a key-value pair to a Python dictionary?",
+    options: {
+      A: "dict.add(key, value)",
+      B: "dict[key] = value",
+      C: "dict.append(key, value)",
+      D: "dict.insert(key, value)",
+    },
+    correctAnswer: "B",
+  },
+  {
+    question: "Which method would you use to read the contents of a file in Python?",
+    options: {
+      A: "read()",
+      B: "readfile()",
+      C: "open()",
+      D: "load()",
+    },
+    correctAnswer: "A",
+  },
+  {
+    question: "What is the result of `3 ** 2` in Python?",
+    options: {
+      A: "9",
+      B: "6",
+      C: "5",
+      D: "8",
+    },
+    correctAnswer: "A",
+  },
+  {
+    question: "Which module in Python would you use to work with regular expressions?",
+    options: {
+      A: "regex",
+      B: "re",
+      C: "regexp",
+      D: "regexlib",
+    },
+    correctAnswer: "B",
+  },
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+const questionContainer = document.getElementById('question');
+const optionsContainer = document.getElementById('options');
+const submitBtn = document.getElementById('submit-btn');
+const resultContainer = document.getElementById('result-container');
+const resultText = document.getElementById('result');
+const scoreText = document.getElementById('score');
+
+function loadQuestion() {
+  const currentQuestion = questions[currentQuestionIndex];
+  questionContainer.textContent = currentQuestion.question;
+
+  let optionsHTML = '';
+  for (let option in currentQuestion.options) {
+    optionsHTML += `
+      <li>
+        <input type="radio" name="option" value="${option}" id="${option}">
+        <span>${currentQuestion.options[option]}</span>
+      </li>
+    `;
+  }
+  optionsContainer.innerHTML = optionsHTML;
+}
+
+function checkAnswer() {
+  const selectedOption = document.querySelector('input[name="option"]:checked');
+  if (!selectedOption) {
+    alert("Please select an option!");
+    return;
+  }
+
+  const answer = selectedOption.value;
+  if (answer === questions[currentQuestionIndex].correctAnswer) {
+    score++;
+    resultText.textContent = "Correct!";
+  } else {
+    resultText.textContent = `Incorrect! The correct answer is ${questions[currentQuestionIndex].correctAnswer}.`;
+  }
+
+  scoreText.textContent = score;
+  resultContainer.style.display = "block";
+  submitBtn.disabled = true;
+}
+
+function nextQuestion() {
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    loadQuestion();
+    resultContainer.style.display = "none";
+    submitBtn.disabled = false;
+  } else {
+    resultText.textContent = "Quiz Finished! Final Score: " + score;
+    submitBtn.disabled = true;
+  }
+}
+
+submitBtn.addEventListener('click', checkAnswer);
+loadQuestion();
