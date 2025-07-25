@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INCREASE KNOWLEDGE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="quiz-container">
+    <h1>General Knowledge Quiz</h1>
+    
+    <div id="question-container">
+      <p id="question">What is the capital of France?</p>
+      
+      <ul id="options">
+        <li><input type="radio" name="option" value="A"> <span>A) Berlin</span></li>
+        <li><input type="radio" name="option" value="B"> <span>B) Madrid</span></li>
+        <li><input type="radio" name="option" value="C"> <span>C) Paris</span></li>
+        <li><input type="radio" name="option" value="D"> <span>D) Rome</span></li>
+      </ul>
+    </div>
+
+    <button id="submit-btn">Submit Answer</button>
+    <div id="result-container" style="display: none;">
+      <h2 id="result"></h2>
+      <button onclick="nextQuestion()">Next Question</button>
+    </div>
+
+    <div id="score-container">
+      <h3>Score: <span id="score">0</span></h3>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
